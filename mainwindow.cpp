@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "employee.h"
+#include"gateauxc.h"
+#include"commandec.h"
 #include <QDebug>
 #include <QApplication>
 #include <QMessageBox>
@@ -76,6 +78,10 @@ void MainWindow::on_addProduct_clicked()
 void MainWindow::on_showProducts_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
+    ui->GatTab->setModel(tabGateaux.show());
+    QSqlQueryModel *mod= new QSqlQueryModel();
+    mod->setQuery(("select ID from GATEAUX"));
+    ui->comboBox_id->setModel(mod);
 }
 
 void MainWindow::on_back_6_clicked()
@@ -96,46 +102,6 @@ void MainWindow::on_back_8_clicked()
 void MainWindow::on_back_9_clicked()
 {
     ui->stackedWidget->setCurrentIndex(7);
-}
-
-void MainWindow::on_addProduct_2_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(11);
-}
-
-void MainWindow::on_showProducts_2_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(12);
-}
-
-void MainWindow::on_back_11_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(5);
-}
-
-void MainWindow::on_back_12_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(5);
-}
-
-void MainWindow::on_toolButton_12_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(13);
-}
-
-void MainWindow::on_toolButton_17_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(14);
-}
-
-void MainWindow::on_back_13_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(11);
-}
-
-void MainWindow::on_back_14_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(12);
 }
 
 //START EMPLOYEE PART
@@ -335,42 +301,142 @@ void MainWindow::on_toolButton_modify_clicked()
 
 //END EMPLOYEE PART
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_addProduct_2_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(15);
+    ui->stackedWidget->setCurrentIndex(11);
 }
 
+void MainWindow::on_showProducts_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(12);
+}
+
+//Gateaux part
+
+void MainWindow::on_toolButton_save_clicked()
+{
+    QString ID= ui->lineEdit_id->text();
+    QString NAME= ui->lineEdit_name->text();
+    int QUANTITY= ui->spinBox_quantity->text().toInt();
+    int PRICE= ui->lineEdit_price->text().toInt();
+
+
+        int x=0;
+        if (x==0)
+        {
+            gateauxC g(ID,NAME,QUANTITY,PRICE);
+            bool toTest=g.add_gateaux();
+
+        if(toTest)
+        {
+            QMessageBox::information(nullptr, QObject::tr("Adding Product"),
+                              QObject::tr("Product added successfully"), QMessageBox::Ok);
+        }
+        ui->lineEdit_name->clear();
+        ui->lineEdit_id->clear();
+        ui->spinBox_quantity->clear();
+        ui->lineEdit_price->clear();
+        ui->stackedWidget->setCurrentIndex(2);
+        }
+
+}
+
+void MainWindow::on_toolButton_delete_clicked()
+{
+    int id = ui->comboBox_id->currentText().toInt();
+    tabGateaux.remove(id);
+    ui->GatTab->setModel(tabGateaux.show());
+    QSqlQueryModel *mod= new QSqlQueryModel();
+    mod->setQuery(("select ID from GATEAUX"));
+    ui->comboBox_id->setModel(mod);
+}
+
+
+
+void MainWindow::on_toolButton_savemod_clicked()
+{
+    QString ID = ui->lineEdit_id_3->text();
+    QString NAME= ui->lineEdit_name_3->text();
+    int QUANTITY= ui->spinBox_quantity_3->text().toInt();
+    int PRICE= ui->lineEdit_price_3->text().toInt();
+
+    int x=0;
+    if (x==0)
+    {
+     gateauxC g(ID,NAME,QUANTITY,PRICE);
+    bool toTest =g.modify();
+    if(toTest)
+    {
+        QMessageBox::information(nullptr, QObject::tr("Editing Product"),
+                          QObject::tr("Product's info edited successfully"), QMessageBox::Ok);
+    }
+    ui->lineEdit_name_3->clear();
+    ui->spinBox_quantity_3->clear();
+    ui->lineEdit_price_3->clear();
+    ui->stackedWidget->setCurrentIndex(4);
+    ui->GatTab->setModel(tabGateaux.show());
+    QSqlQueryModel *mod= new QSqlQueryModel();
+    mod->setQuery(("select ID from GATEAUX"));
+    }
+}
+
+void MainWindow::on_GatTab_activated(const QModelIndex &index)
+{
+    QString val=ui->GatTab->model()->data(index).toString();
+        QSqlQuery query;
+        query.prepare("SELECT * FROM GATEAUX WHERE ID = '"+val+"'");
+        if(query.exec())
+        {
+            while (query.next())
+            {
+                ui->stackedWidget->setCurrentIndex(15);
+                ui->lineEdit_id_3->setText(query.value(0).toString());
+                ui->lineEdit_name_3->setText(query.value(1).toString());
+                ui->spinBox_quantity_3->setValue(query.value(2).toInt());
+                ui->lineEdit_price_3->setText(query.value(3).toString());
+            }
+        }
+}
+/*
 void MainWindow::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(16);
 }
 
-void MainWindow::on_backbtn_2_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(6);
-}
-
-void MainWindow::on_backbtn_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(6);
-}
-
-void MainWindow::on_ajoutercoupon_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(18);
-}
-
-void MainWindow::on_ajouterclient_clicked()
+void MainWindow::on_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(17);
+    tablecommande.remove(id);
+    ui->tableC->setModel(tablecommande.show());
+    QSqlQueryModel *mod= new QSqlQueryModel();
+    mod->setQuery(("select CIN from EMPLOYEE"));
+    ui->comboBox->setModel(mod);
 }
 
-void MainWindow::on_backbtn_3_clicked()
+void MainWindow::on_pushButton_3_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(15);
-}
+    QSqlQueryModel *mod= new QSqlQueryModel();
+    mod->setQuery(("select NAME from GATEAUX"));
+    QString ID= ui->lineEdit_idc->text();
+    ui->comboBox_name->setModel(mod);
+    int SOMME= ui->lineEdit_somme->text().toInt();
 
-void MainWindow::on_backbtn_4_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(16);
+
+        int x=0;
+        if (x==0)
+        {
+            commandeC cc(ID,GATEAUXNAME,SOMME);
+            bool toTest=cc.add_commande();
+
+        if(toTest)
+        {
+            QMessageBox::information(nullptr, QObject::tr("Adding Order"),
+                              QObject::tr("Order added successfully"), QMessageBox::Ok);
+        }
+        ui->lineEdit_idc->clear();
+        ui->lineEdit_somme->clear();
+        ui->comboBox_name->clear();
+        ui->stackedWidget->setCurrentIndex(1);
+        }
 }
+*/

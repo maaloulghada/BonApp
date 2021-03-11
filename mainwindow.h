@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <employee.h>
+#include <gateauxc.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -63,42 +64,30 @@ private slots:
 
     void on_back_10_clicked();
 
+    void on_toolButton_save_clicked();
+
     void on_addProduct_2_clicked();
-
+    
     void on_showProducts_2_clicked();
+    
+    void on_toolButton_delete_clicked();
 
-    void on_back_11_clicked();
+    void on_toolButton_savemod_clicked();
 
-    void on_back_12_clicked();
+    void on_GatTab_activated(const QModelIndex &index);
 
-    void on_toolButton_12_clicked();
+   // void on_pushButton_2_clicked();
 
-    void on_toolButton_17_clicked();
+    //void on_pushButton_clicked();
 
-    void on_back_13_clicked();
-
-    void on_back_14_clicked();
-
-    void on_pushButton_clicked();
-
-    void on_pushButton_2_clicked();
-
-    void on_backbtn_2_clicked();
-
-    void on_backbtn_clicked();
-
-    void on_ajoutercoupon_clicked();
-
-    void on_ajouterclient_clicked();
-
-    void on_backbtn_3_clicked();
-
-    void on_backbtn_4_clicked();
+    //void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;
 
     //louay doc
     employee tableEmployee;
+    //ghada doc
+    gateauxC tabGateaux;
 };
 #endif // MAINWINDOW_H
