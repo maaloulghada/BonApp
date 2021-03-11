@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <employee.h>
+#include <clients.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -95,10 +96,25 @@ private slots:
 
     void on_backbtn_4_clicked();
 
+    void on_supprimerClient_clicked();
+
+    void on_supprimerCoupon_clicked();
+
+    void on_ajouterClientBtn_clicked();
+
+
+
+    void on_clientsTable_cellChanged(int row, int column);
+
+
+    void on_clientsTable_cellDoubleClicked(int row, int column);
+
 private:
     Ui::MainWindow *ui;
 
     //louay doc
     employee tableEmployee;
+    clients Clients;
+    pair<int,int> lastClientCell = make_pair(-1,-1);
 };
 #endif // MAINWINDOW_H

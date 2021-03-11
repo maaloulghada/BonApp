@@ -40,7 +40,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="mainPage">
      <widget class="QLabel" name="label_2">
@@ -2782,24 +2782,24 @@ background-color: rgb(0, 0, 0,0%);</string>
      </widget>
     </widget>
     <widget class="QWidget" name="gestClients">
-     <widget class="QPushButton" name="supprimer">
+     <widget class="QPushButton" name="supprimerClient">
       <property name="geometry">
        <rect>
-        <x>450</x>
+        <x>650</x>
         <y>480</y>
         <width>191</width>
         <height>71</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">#supprimer {
+       <string notr="true">#supprimerClient {
 background-color: transparent;
 border-image: url(:/img/img/supprimer0001.png);
 background: none;
 border: none;
 background-repeat: none;
 }
-#supprimer:pressed
+#supprimerClient:pressed
 {
    border-image: url(:/img/img/supprimer0002.png);
 }</string>
@@ -2860,33 +2860,7 @@ background-repeat: none;
        <string/>
       </property>
      </widget>
-     <widget class="QPushButton" name="modifier">
-      <property name="geometry">
-       <rect>
-        <x>650</x>
-        <y>480</y>
-        <width>191</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">#modifier {
-background-color: transparent;
-border-image: url(:/img/img/modifier0001.png);
-background: none;
-border: none;
-background-repeat: none;
-}
-#modifier:pressed
-{
-   border-image: url(:/img/img/modifier0002.png);
-}</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QTableWidget" name="clientsTable">
       <property name="geometry">
        <rect>
         <x>70</x>
@@ -3035,7 +3009,7 @@ background-repeat: none;
        <string/>
       </property>
      </widget>
-     <widget class="QTableWidget" name="tableWidget_2">
+     <widget class="QTableWidget" name="couponsTable">
       <property name="geometry">
        <rect>
         <x>70</x>
@@ -3121,7 +3095,7 @@ background-repeat: none;
        </property>
       </item>
      </widget>
-     <widget class="QPushButton" name="supprimer_2">
+     <widget class="QPushButton" name="supprimerCoupon">
       <property name="geometry">
        <rect>
         <x>450</x>
@@ -3253,7 +3227,7 @@ background-repeat: none;
        <property name="geometry">
         <rect>
          <x>16</x>
-         <y>178</y>
+         <y>210</y>
          <width>81</width>
          <height>31</height>
         </rect>
@@ -3276,11 +3250,11 @@ background-repeat: none;
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_4">
+      <widget class="QLineEdit" name="labelClientTel">
        <property name="geometry">
         <rect>
          <x>106</x>
-         <y>228</y>
+         <y>250</y>
          <width>231</width>
          <height>31</height>
         </rect>
@@ -3295,14 +3269,14 @@ background-repeat: none;
         <string notr="true">background-color:white;</string>
        </property>
        <property name="text">
-        <string>94338745</string>
+        <string/>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_3">
+      <widget class="QLineEdit" name="labelClientEmail">
        <property name="geometry">
         <rect>
          <x>106</x>
-         <y>178</y>
+         <y>210</y>
          <width>231</width>
          <height>31</height>
         </rect>
@@ -3317,14 +3291,14 @@ background-repeat: none;
         <string notr="true">background-color:white;</string>
        </property>
        <property name="text">
-        <string>Iyedbhd@gmail.com</string>
+        <string/>
        </property>
       </widget>
       <widget class="QLabel" name="label_57">
        <property name="geometry">
         <rect>
          <x>16</x>
-         <y>78</y>
+         <y>90</y>
          <width>81</width>
          <height>31</height>
         </rect>
@@ -3347,11 +3321,11 @@ background-repeat: none;
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="labelClientNom">
        <property name="geometry">
         <rect>
          <x>106</x>
-         <y>78</y>
+         <y>90</y>
          <width>231</width>
          <height>31</height>
         </rect>
@@ -3366,14 +3340,14 @@ background-repeat: none;
         <string notr="true">background-color:white;</string>
        </property>
        <property name="text">
-        <string>Ben Hadj Dahmen</string>
+        <string/>
        </property>
       </widget>
       <widget class="QLabel" name="label_58">
        <property name="geometry">
         <rect>
          <x>16</x>
-         <y>228</y>
+         <y>250</y>
          <width>81</width>
          <height>31</height>
         </rect>
@@ -3439,7 +3413,7 @@ background-repeat: none;
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_5">
+      <widget class="QLineEdit" name="labelClientPrenom">
        <property name="geometry">
         <rect>
          <x>106</x>
@@ -3458,14 +3432,14 @@ background-repeat: none;
         <string notr="true">background-color:white;</string>
        </property>
        <property name="text">
-        <string>Iyed</string>
+        <string/>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="ajouterClientBtn">
        <property name="geometry">
         <rect>
          <x>200</x>
-         <y>280</y>
+         <y>300</y>
          <width>141</width>
          <height>41</height>
         </rect>
@@ -3475,6 +3449,55 @@ background-repeat: none;
        </property>
        <property name="text">
         <string>Ajouter Client</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_68">
+       <property name="geometry">
+        <rect>
+         <x>16</x>
+         <y>170</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Aller</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>Adresse:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="labelClientAdresse">
+       <property name="geometry">
+        <rect>
+         <x>106</x>
+         <y>170</y>
+         <width>231</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Aller</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:white;</string>
+       </property>
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </widget>
@@ -3945,7 +3968,7 @@ background-repeat: none;
      <x>0</x>
      <y>0</y>
      <width>1128</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

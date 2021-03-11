@@ -3,11 +3,13 @@
 #include "employee.h"
 #include <QDebug>
 #include <QApplication>
+#include <QSqlRecord>
 #include <QMessageBox>
 #include <iostream>
 #include<string>
 #include <algorithm>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -16,7 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
 }
+
+
 
 MainWindow::~MainWindow()
 {
@@ -335,16 +341,6 @@ void MainWindow::on_toolButton_modify_clicked()
 
 //END EMPLOYEE PART
 
-void MainWindow::on_pushButton_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(15);
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(16);
-}
-
 void MainWindow::on_backbtn_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
@@ -373,4 +369,86 @@ void MainWindow::on_backbtn_3_clicked()
 void MainWindow::on_backbtn_4_clicked()
 {
     ui->stackedWidget->setCurrentIndex(16);
+}
+
+
+
+void MainWindow::on_pushButton_clicked()
+{
+
+    ui->stackedWidget->setCurrentIndex(15);
+
+
+    clients::processClientTable(ui->clientsTable);
+
+
+
+
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(16);
+
+
+    clients::processClientTable(ui->couponsTable);
+
+}
+
+void MainWindow::on_supprimerClient_clicked()
+{
+
+    clients::deleteSelectedClients(ui->clientsTable);
+
+
+}
+
+void MainWindow::on_supprimerCoupon_clicked()
+{
+    clients::deleteSelectedCoupons(ui->couponsTable);
+
+}
+
+void MainWindow::on_ajouterClientBtn_clicked()
+{
+    bool added = clients::addClientToDB(NULL,ui->labelClientNom->text(),ui->labelClientPrenom->text(), ui->labelClientAdresse->text(),ui->labelClientEmail->text(),ui->labelClientTel->text());
+    clients::processClientTable(ui->clientsTable);
+    if(added)
+    {
+        QMessageBox::information(nullptr, QObject::tr("Client Added"),QObject::tr("Client Added Successfuly"), QMessageBox::Ok);
+    }
+    ui->stackedWidget->setCurrentIndex(15);
+
+}
+
+
+void MainWindow::on_clientsTable_cellChanged(int row, int column)
+{
+    //clients::changeSelectedClientCell(ui->clientsTable, row, column);
+    //QDebug
+    qDebug() <<"Edited "<<row<<" and "<< column;
+    if(row == lastClientCell.first && column == lastClientCell.second && column != 0)
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE CLIENT SET NOM= :NOM, PRENOM= :PRENOM, ADRESSE= :ADRESSE, TEL= :TEL WHERE ID= :ID");
+
+        query.bindValue(":ID",ui->clientsTable->item(row,0)->text());
+        query.bindValue(":NOM",ui->clientsTable->item(row,1)->text());
+        query.bindValue(":PRENOM",ui->clientsTable->item(row,2)->text());
+        query.bindValue(":ADRESSE",ui->clientsTable->item(row,3)->text());
+        query.bindValue(":EMAIL",ui->clientsTable->item(row,4)->text());
+        query.bindValue(":TEL",ui->clientsTable->item(row,5)->text());
+        query.exec();
+        lastClientCell = make_pair(-1,-1);
+
+    }
+}
+
+
+
+void MainWindow::on_clientsTable_cellDoubleClicked(int row, int column)
+{
+
+    lastClientCell = make_pair(row,column);
+
 }
