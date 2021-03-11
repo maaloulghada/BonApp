@@ -17,14 +17,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     connection.cpp \
-    employee.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    recette.cpp
 
 HEADERS += \
     connection.h \
-    employee.h \
-    mainwindow.h
+    mainwindow.h \
+    recette.h
 
 FORMS += \
     mainwindow.ui
@@ -34,5 +34,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+DISTFILES +=
+
 RESOURCES += \
-    assets.qrc
+    Resources.qrc
